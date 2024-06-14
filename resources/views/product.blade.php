@@ -1,7 +1,9 @@
+@extends('layouts.app')
 @extends('header')
 @push('title')
 <title>Product</title>
 @endpush
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12"> 
@@ -21,11 +23,12 @@
             </tr>
         </thead>
         <tbody>
+        
            @foreach($products as $product)
             <tr>
             <td>{{$product->id}}</td>
             <td>{{$product->name}}</td>
-            <td>{{$product->description}}</td>
+            <td> {{ Str::limit($product->description, 150) }}</td>
             <td>{{$product->status}}</td>
             <td>{{$product->quantity}}</td>
             <td>
@@ -43,3 +46,4 @@
     </div>
  </div>
 </div>
+@endsection

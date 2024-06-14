@@ -1,10 +1,12 @@
+@extends('layouts.app')
 @extends('header')
 @push('title')
 <title>View Product</title>
 @endpush
-
+@section('content')
 <div class="container">
     <div class="row py-5">
+        {{-- {{ Breadcrumbs::render('Product',$product) }} --}}
         <div class="col-md-8 border py-3">
             <h4>{{$product->name}}</h4>
             <p>Status :{{$product->status}}</p>
@@ -14,3 +16,4 @@
         </div>
     </div>
 </div>
+@endsection

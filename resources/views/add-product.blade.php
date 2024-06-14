@@ -1,8 +1,9 @@
+@extends('layouts.app')
 @extends('header')
 @push('title')
 <title>Add Product</title>
 @endpush
-
+@section('content')
 <div class="container">
     <div class="row py-5">
         <div class="col-md-6 border py-3">
@@ -34,3 +35,4 @@
 </div>
 </div>
 </div>
+@endsection

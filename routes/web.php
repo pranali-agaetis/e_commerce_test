@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,22 +16,25 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 //Product View
-Route::get('/product',[ProductController::class, 'index']);
+Route::get('/product',[ProductController::class, 'index'])->middleware('auth');
 
 //View Product Details Page
-Route::get('/view-product/{id}',[ProductController::class,'show']);
+Route::get('/view-product/{id}',[ProductController::class,'show'])->middleware('auth');
 
 //Add Product
-Route::get('add-product',[ProductController::class,'create']);
-Route::post('add-product',[ProductController::class,'store']);
+Route::get('add-product',[ProductController::class,'create'])->middleware('auth');
+Route::post('add-product',[ProductController::class,'store'])->middleware('auth');
 
 //Edit Product
-Route::get('edit-product/{id}',[ProductController::class,'edit']);
-Route::post('edit-product/{id}',[ProductController::class,'update']);
+Route::get('edit-product/{id}',[ProductController::class,'edit'])->middleware('auth');
+Route::post('edit-product/{id}',[ProductController::class,'update'])->middleware('auth');
 
 //Delete Product
 Route::get('delete/{id}',[ProductController::class,'destroy']);
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
