@@ -50,7 +50,17 @@ class PostController extends Controller
           $posts->slug=$request['slug'];
           $posts->body=$request->input('body');
           $posts->category_id=$request->input('category');
-  
+
+
+          if($request->hasfile('image'))
+        {
+            $file = $request->file('image');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extenstion;
+            $file->move('uploads/posts/', $filename);
+            $posts->image = $filename;
+        }
+       //   dd( $posts->image);
           $posts->save();
     
           return redirect()->route('posts.index')

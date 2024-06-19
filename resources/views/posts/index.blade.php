@@ -20,18 +20,18 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
     </div>
   </nav>
   <div class="container mt-5">
-    <div class="row">
+    <div class="row ">
       @if(session()->has('message'))
         <div class="alert alert-success alert-dissmissable">      {{ session()->get('message') }}      </div>  
      @endif
     @foreach ($posts as $post)
-        <div class="col-sm-3 d-flex">
+        <div class="col-sm-2 d-flex mb-3">
           <div class="card">
             <div class="card-header">
               <h5 class="card-title">{{ $post->title }}</h5>
             </div>
             <div class="card-body flex-fill">
-              <small><b>Category :</b> {{$post->category->name}}</small>
+              <small><b>Category :</b> {{$post->category->name ?? 'No Category Found'}}</small>
               <hr>
               <p class="card-text">{{ $post->body }}</p>
             </div>

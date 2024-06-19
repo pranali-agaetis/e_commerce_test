@@ -18,7 +18,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('slug')->nullable();
             $table->text('body');
-            $table->unsignedBigInteger('category_id');
+            $table->text('image');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
            
