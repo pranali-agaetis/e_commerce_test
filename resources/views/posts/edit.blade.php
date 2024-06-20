@@ -20,10 +20,11 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
           <div class="col-10 col-md-8 col-lg-6">
             <h3>Edit a Post</h3>
              {{-- @php
-                echo $posts->slug
+                echo $posts->image;
             @endphp  --}}
-            <form action="{{ route('posts.update', $posts->slug ) }}" method="post">
+            <form action="{{ route('posts.update', $posts->slug ) }}" method="post" enctype="multipart/form-data">
               @csrf
+              @method('PUT')
               <div class="form-group mb-3">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" name="title" required value="{{$posts->title}}">
@@ -42,6 +43,15 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
                 <label >Body</label>
                 <textarea class="form-control" id="body" name="body" rows="3" required>{{$posts->body}}</textarea>
               </div>
+              <div class="form-group mb-3">
+                <label for="title">Image</label>   
+                <input type="file" class="form-control" id="image" name="image" required>
+                {{-- @if($posts->image) --}}
+                <img src="{{asset('uploads/posts/'.$posts->image)}}" alt="{{$posts->title}}" class='img-responsive' width="150px"/>
+                {{-- @endif --}}
+              </div>
+             
+              
               <br>
               <button type="submit" class="btn btn-primary">Update Post</button>
               

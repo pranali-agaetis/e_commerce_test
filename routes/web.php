@@ -56,7 +56,7 @@ Route::get('/posts/{post}', [PostController::class,'show'])->name('posts.show');
 // returns the form for editing a post
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
 // updates a post
-Route::post('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
+Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
 // deletes a post
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 

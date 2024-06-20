@@ -11,6 +11,8 @@ use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\File;
+
 class PostController extends Controller
 {
     /**
@@ -119,7 +121,25 @@ class PostController extends Controller
           $posts->body=$request->input('body');
           $posts->category_id=$request->input('category');
 
-          $posts->update();
+          
+          if($request->hasfile('image'))
+        {
+            $destination='uploads/posts/'.$posts->image;
+            //dd($destination);
+
+            if(File::exists($destination))
+            {
+               File::delete($destination);
+            }
+          
+            $file = $request->file('image');
+            $filename =  $file->getClientOriginalName();
+            $file->move('uploads/posts/', $filename);
+            $posts->image = $filename;
+        }
+       // return $posts;
+
+        $posts->update();
 
           return redirect()->route('posts.index') ->with('message', 'Post updated successfully.');
     }

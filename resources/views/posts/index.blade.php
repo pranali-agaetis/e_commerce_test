@@ -39,13 +39,13 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
               <div class="row">
                 <div class="col-sm">
                   
-                  <a href="{{ route('posts.edit', $post->slug) }}" class="btn btn-primary btn-sm">Edit</a>
+                  <a href="{{ route('posts.edit', $post->slug) }}" class="btn  btn-sm">Edit</a>
                 </div>
                 <div class="col-sm">
                     <form action="{{ route('posts.destroy', $post->id) }}" method="post">
                       @csrf
                       @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      <button type="submit" class="btn  btn-sm">Delete</button>
                     </form>
                 </div>
               </div>
