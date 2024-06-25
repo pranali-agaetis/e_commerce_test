@@ -62,15 +62,16 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        return view('view-product', compact('product'));
+
+        $bread = [
+            'Products' => url('/product'),
+            "{$product->name}" => url("/product/{$product->id}")
+        ];
+        return view('view-product', compact('product', 'bread'));
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+     *br**/
     public function edit($id)
     {
         $product = Product::find($id);

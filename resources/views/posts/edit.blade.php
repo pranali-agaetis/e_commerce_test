@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <title>Posts</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container-fluid">
+          <a class="navbar-brand h1" href={{ route('posts.index') }}>Posts</a>
+        </div>
+      </nav>
+     
+      <div class="container h-100 mt-5">
+        <div class="row h-100 justify-content-center align-items-center">
+          <div class="col-10 col-md-8 col-lg-6">
+            <h3>Edit a Post</h3>
+             {{-- @php
+                echo $posts->image;
+            @endphp  --}}
+            <form action="{{ route('posts.update', $posts->slug ) }}" method="post" enctype="multipart/form-data">
+              @csrf
+              @method('PUT')
+              <div class="form-group mb-3">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required value="{{$posts->title}}">
+              </div>
+              <div class="form-group mb-3">
+                <label for="title">Category</label>
+                <select class="form-control" name='category' id="category">
+                    <option value="">Select Category </option>
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"  {{ $category->id == $posts->category_id ? 'selected' : '' }} >{{$category->name}}</option> 
+                    @endforeach
+                    
+                </select>    
+              </div>
+              <div class="form-group mb-3">
+                <label >Body</label>
+                <textarea class="form-control" id="body" name="body" rows="3" required>{{$posts->body}}</textarea>
+              </div>
+              <div class="form-group mb-3">
+                <label for="title">Image</label>   
+                <input type="file" class="form-control" id="image" name="image" required>
+                {{-- @if($posts->image) --}}
+                <img src="{{asset('uploads/posts/'.$posts->image)}}" alt="{{$posts->title}}" class='img-responsive' width="150px"/>
+                {{-- @endif --}}
+              </div>
+             
+              
+              <br>
+              <button type="submit" class="btn btn-primary">Update Post</button>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
